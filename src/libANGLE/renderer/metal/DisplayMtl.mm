@@ -958,6 +958,9 @@ void DisplayMtl::initializeExtensions() const
     mNativeExtensions.copyTextureCHROMIUM           = true;
     mNativeExtensions.copyCompressedTextureCHROMIUM = false;
 
+    // Hack(Pojav): enable shader non-constant global init
+    mNativeExtensions.shaderNonConstantGlobalInitializersEXT = true;
+
 #if !ANGLE_PLATFORM_WATCHOS
     if (@available(iOS 14.0, macOS 10.11, macCatalyst 14.0, tvOS 16.0, *))
     {

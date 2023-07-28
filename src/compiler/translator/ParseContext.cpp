@@ -2723,6 +2723,7 @@ bool TParseContext::executeInitializer(const TSourceLoc &line,
                            TExtension::EXT_shader_non_constant_global_initializers);
     bool globalInitWarning = false;
     if (symbolTable.atGlobalLevel() &&
+        !sh::IsDesktopGLSpec(mShaderSpec) && // Hack(Pojav): skip check
         !ValidateGlobalInitializer(initializer, mShaderVersion, sh::IsWebGLBasedSpec(mShaderSpec),
                                    nonConstGlobalInitializers, &globalInitWarning))
     {
@@ -7538,7 +7539,8 @@ void TParseContext::checkImageMemoryAccessForUserDefinedFunctions(
         TIntermTyped *typedArgument        = arguments[i]->getAsTyped();
         const TType &functionArgumentType  = typedArgument->getType();
         const TType &functionParameterType = functionDefinition->getParam(i)->getType();
-        ASSERT(functionArgumentType.getBasicType() == functionParameterType.getBasicType());
+        // Hack(Pojav): implicit conv
+        //ASSERT(functionArgumentType.getBasicType() == functionParameterType.getBasicType());
 
         if (IsImage(functionArgumentType.getBasicType()))
         {
