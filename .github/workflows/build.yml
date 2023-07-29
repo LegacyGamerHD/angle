@@ -51,5 +51,4 @@ jobs:
         with:
           name: angle-libs-${{matrix.arch}}
           path: |
-            angle/out/Android-${{matrix.arch}}/*
             angle/*
